@@ -6,4 +6,17 @@ public partial class LoginnViewModel : BaseViewModel
     private string _username;
     [ObservableProperty]
     private string _password;
+    [RelayCommand]
+    private void OnSignUpClicked()
+    {
+        Debug.WriteLine("SignUp button clicked");
+        Shell.Current.GoToAsync("///" + nameof(SignupPage));
+        
+
+    }
+    [RelayCommand]
+    private void OnSingInClicked()
+    {
+    }
 }
+

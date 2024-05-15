@@ -33,6 +33,7 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<OpeningPage>();
 
+
 		return builder.Build();
 	}
 }
