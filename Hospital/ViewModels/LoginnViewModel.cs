@@ -11,12 +11,13 @@ public partial class LoginnViewModel : BaseViewModel
     {
         Debug.WriteLine("SignUp button clicked");
         Shell.Current.GoToAsync("///" + nameof(SignupPage));
-        
 
     }
     [RelayCommand]
     private void OnSingInClicked()
     {
+        Debug.WriteLine("click");
+        Shell.Current.GoToAsync("///" + nameof(OpeningPage));
     }
 }
 
