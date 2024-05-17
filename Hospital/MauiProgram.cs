@@ -1,4 +1,6 @@
-﻿namespace Hospital;
+﻿using ZXing.Net.Maui.Controls;
+using ZXing.Net.Maui;
+namespace Hospital;
 
 public static class MauiProgram
 {
@@ -7,7 +9,8 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
-			.UseMauiCommunityToolkit()
+            .UseBarcodeReader()
+            .UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("FontAwesome6FreeBrands.otf", "FontAwesomeBrands");
