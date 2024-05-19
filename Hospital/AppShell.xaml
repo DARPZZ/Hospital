@@ -32,4 +32,10 @@
 		Icon="avatar.png"
 		ContentTemplate="{DataTemplate views:OpeningPage}"
 		Route="OpeningPage" />
+    <ShellContent
+	Shell.NavBarIsVisible="true"
+	Title="Qr"
+	Icon="avatar.png"
+	ContentTemplate="{DataTemplate views:QrPage}"
+	Route="QrPage" />
 </Shell>

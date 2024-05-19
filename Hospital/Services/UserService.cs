@@ -12,7 +12,7 @@ namespace Hospital.Services
     public class UserService
     {
             private readonly HttpClient _httpClient;
-            private readonly string baseString = "http://10.176.163.241:4000/";
+            private readonly string baseString = "http://192.168.9.119:4000/";
             public UserService()
             {
                 _httpClient = new HttpClient();
@@ -24,7 +24,7 @@ namespace Hospital.Services
                 var url = baseString + "users";
                 var userJson = JsonConvert.SerializeObject(user);
                 var content = new StringContent(userJson, Encoding.UTF8, "application/json");
-                Debug.WriteLine(userJson);
+
                 try
                 {
                     var response = await _httpClient.PostAsync(url, content);

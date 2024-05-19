@@ -1,4 +1,5 @@
-﻿using Hospital.Models;
+﻿using CommunityToolkit.Maui.Behaviors;
+using Hospital.Models;
 using Hospital.Services;
 
 namespace Hospital.ViewModels;
@@ -7,7 +8,8 @@ public partial class SignupViewModel : BaseViewModel
 {
 
     private readonly UserService _userService;
-
+    [ObservableProperty]
+    private bool _isPasswordTooltipVisible;
     [ObservableProperty]
     private string password;
     [ObservableProperty]
@@ -41,8 +43,10 @@ public partial class SignupViewModel : BaseViewModel
         {
             Debug.WriteLine("User registration failed.");
         }
-
-
-
     }
+    private void TogglePasswordTooltip()
+    {
+        IsPasswordTooltipVisible = !IsPasswordTooltipVisible;
+    }
+
 }

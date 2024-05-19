@@ -1,9 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:vm="clr-namespace:Hospital.ViewModels"
-			 x:Class="Hospital.Views.SignupPage"
-			 x:DataType="vm:SignupViewModel">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Hospital.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Hospital.Views.SignupPage"
+             x:DataType="vm:SignupViewModel">
+
+    <ContentPage.Resources>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+        <Style x:Key="ValidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Green" />
+        </Style>
+    </ContentPage.Resources>
 
     <Grid BackgroundColor="White">
         <Grid.RowDefinitions>
@@ -43,7 +53,6 @@
                     </StackLayout>
                 </Frame>
 
-
                 <Frame BackgroundColor="Transparent" Margin="0,25,0,20" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                     <StackLayout Orientation="Horizontal">
                         <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
@@ -58,7 +67,14 @@
                         <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
                             <Image Source="avatar2.png" Aspect="AspectFill" Margin="0"/>
                         </Frame>
-                        <Entry Text="{Binding Email}" Placeholder="Email" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                        <Entry Text="{Binding Email}" Placeholder="Email"  FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0">
+                            <Entry.Behaviors>
+                                <toolkit:EmailValidationBehavior 
+                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                    ValidStyle="{StaticResource ValidEntryStyle}"
+                                    Flags="ValidateOnValueChanged" />
+                            </Entry.Behaviors>
+                        </Entry>
                     </StackLayout>
                 </Frame>
 
@@ -67,13 +83,53 @@
                         <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
                             <Image Source="lock.png" Aspect="AspectFill" Margin="0"/>
                         </Frame>
-                        <Entry Text="{Binding Password}"  IsPassword="True" Placeholder="Password" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                        <Entry Text="{Binding Password}"  IsPassword="True" Placeholder="Password"  FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0">
+
+                            <Entry.Behaviors>
+                                <toolkit:MultiValidationBehavior 
+                                    InvalidStyle="{StaticResource InvalidEntryStyle}"  
+                                    ValidStyle="{StaticResource ValidEntryStyle}"
+                                    Flags="ValidateOnValueChanged">
+
+                                <toolkit:CharactersValidationBehavior 
+                                    x:Name="DigitValidation" 
+                                    CharacterType="Digit" 
+                                    MinimumCharacterTypeCount="1" 
+                                    toolkit:MultiValidationBehavior.Error="1 digit" 
+                                    RegexPattern="" />
+
+                                <toolkit:CharactersValidationBehavior 
+                                    x:Name="UpperValidation" 
+                                    CharacterType="UppercaseLetter" 
+                                    MinimumCharacterTypeCount="1" 
+                                    toolkit:MultiValidationBehavior.Error="1 upper case" 
+                                    RegexPattern="" />
+
+                                <toolkit:CharactersValidationBehavior 
+                                    x:Name="SymbolValidation" 
+                                    CharacterType="NonAlphanumericSymbol" 
+                                    MinimumCharacterTypeCount="1" 
+                                    toolkit:MultiValidationBehavior.Error="1 symbol" 
+                                    RegexPattern=""  />
+
+                                <toolkit:CharactersValidationBehavior 
+                                    x:Name="AnyValidation" 
+                                    CharacterType="Any" 
+                                    MinimumCharacterTypeCount="8" 
+                                    toolkit:MultiValidationBehavior.Error="8 characters" 
+                                    RegexPattern="" />
+                                </toolkit:MultiValidationBehavior>
+                            </Entry.Behaviors>
+                        </Entry>
+                        
                     </StackLayout>
+                    
                 </Frame>
                 <Button Command="{Binding OkClickedCommand}"  Text="SIGN UP" BackgroundColor="LightGreen" TextColor="White" FontAttributes="Bold" HeightRequest="50" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0"/>
-
             </StackLayout>
+
+
+
         </Grid>
     </Grid>
-
 </ContentPage>

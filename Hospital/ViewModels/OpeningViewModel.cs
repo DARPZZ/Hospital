@@ -1,14 +1,12 @@
-﻿namespace Hospital.ViewModels;
-
-public partial class OpeningViewModel : BaseViewModel
+﻿namespace Hospital.ViewModels
 {
-    [ObservableProperty]
-    public string scannedText;
-    [RelayCommand]
-    public void OnPrintTextClicked()
+    public partial class OpeningViewModel : BaseViewModel,IQueryAttributable
     {
-
-        Debug.WriteLine(ScannedText);
+        [ObservableProperty]
+        public string scanText;
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            ScanText = query["scanText"] as string;
+        }
     }
-    
 }

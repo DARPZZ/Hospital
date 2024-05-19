@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             x:Class="Hospital.Views.QrPage"
+             Title="QrPage">
+    <StackLayout>
+        <Label
+            Text="Scan the QR code"
+            VerticalTextAlignment="Center"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Margin="0,70,0,0"
+            FontAttributes="Bold"
+            FontSize="Large"
+            >
+           
+        </Label>
+        <zxing:CameraBarcodeReaderView x:Name="cameraView"
+                                   BarcodesDetected="cameraView_BarcodesDetected"
+                                   HorizontalOptions="FillAndExpand"
+                                   VerticalOptions="FillAndExpand"
+                                   WidthRequest="250"
+                                   HeightRequest="250"/>
+
+       
+        <Entry Text="{Binding ScannedText}"
+           IsReadOnly="True"
+           TranslationX="250"
+           IsVisible="Hidden"
+           x:Name="text"
+           HorizontalOptions="Center"
+           VerticalOptions="End"
+           />
+    </StackLayout>
+</ContentPage>
