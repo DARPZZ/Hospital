@@ -14,6 +14,7 @@
             Debug.WriteLine("logout clicked");
             SecureStorage.Default.Remove("email");
             SecureStorage.Default.Remove("password");
+            Shell.Current.GoToAsync("///" + nameof(LoginnPage));
 
         }
     }
