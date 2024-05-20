@@ -8,5 +8,13 @@
         {
             ScanText = query["scanText"] as string;
         }
+        [RelayCommand]
+        private void OnLogoutClicked()
+        {
+            Debug.WriteLine("logout clicked");
+            SecureStorage.Default.Remove("email");
+            SecureStorage.Default.Remove("password");
+
+        }
     }
 }

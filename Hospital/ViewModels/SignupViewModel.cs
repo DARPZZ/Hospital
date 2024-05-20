@@ -37,7 +37,7 @@ public partial class SignupViewModel : BaseViewModel
         if (isCreated)
         {
             Debug.WriteLine("User registered successfully.");
-
+            await Shell.Current.GoToAsync("///" + nameof(LoginnPage));
         }
         else
         {

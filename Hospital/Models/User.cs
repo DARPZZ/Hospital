@@ -24,5 +24,11 @@ namespace Hospital.Models
             this.firstName = firstName;
             this.lastName = lastName;
         }
+
+        public User(string email, string password)
+        {
+            this.email = email;
+            this.password = password;
+        }
     }
 }
