@@ -6,11 +6,19 @@
              x:Class="Hospital.Views.OpeningPage"
              x:DataType="vm:OpeningViewModel">
     <StackLayout>
-
-        <Entry Margin="0,30,0,0"
+        <Label
+            Margin="0,30,0,0"
             WidthRequest="200"
-            Placeholder="Youre id"
-            IsReadOnly="True"
+            Text="{Binding Welcome}"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"
+            FontAttributes="Bold"
+            FontSize="Body"
+            />
+
+        <Label Margin="0,30,0,0"
+            WidthRequest="200"
+  
             HorizontalTextAlignment="Center"
             Text="{Binding ScanText}"
             />
@@ -21,7 +29,7 @@
             FontAttributes="Bold"
             FontSize="Large"
             HorizontalOptions="Center"
-            Margin="0,60,0,0"
+            Margin="0,125,0,0"
             Text="Open drawer"
         />
         <Button
@@ -34,14 +42,6 @@
              Text="Log out"
              Command="{Binding LogoutClickedCommand}"
         />
-        <Button
-            VerticalOptions="Center"
-            Margin="0,40,0,0"
-            WidthRequest="150"
-            HeightRequest="50"
-            Text="Test"
-            Command="{Binding TestClickedCommand}"
-            />
     </StackLayout>
     
 

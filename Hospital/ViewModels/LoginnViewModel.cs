@@ -41,8 +41,12 @@ public partial class LoginnViewModel : BaseViewModel
               await SecureStorage.SetAsync("email", Username);
               await SecureStorage.SetAsync("password", Password);
             }
+            var navigationParameters = new Dictionary<string, object>
+            {
+                { "email", Username },
+            };
 
-            await Shell.Current.GoToAsync("///" + nameof(OpeningPage));
+            await Shell.Current.GoToAsync("///" + nameof(OpeningPage),false,navigationParameters);
         }
         else
         {
@@ -56,18 +60,26 @@ public partial class LoginnViewModel : BaseViewModel
        string? password = await SecureStorage.GetAsync("password");
         if (email != null && password !=null)
         {
+          
             var user = new User
             {
                 email = email,
                 password = password
             };
+           
             bool isCorrectCredentials = await _userService.LogUserInAsync(user);
             if (isCorrectCredentials)
             {
-               await Shell.Current.GoToAsync("///" + nameof(OpeningPage));
+                var navigationParameters = new Dictionary<string, object>
+{               
+                    { "email", email },
+                };
+                
+                await Shell.Current.GoToAsync("///" + nameof(OpeningPage),false,navigationParameters);
             }
         }
 
     }
+
 }
 

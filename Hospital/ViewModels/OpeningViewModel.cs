@@ -6,7 +6,7 @@ namespace Hospital.ViewModels
 {
     public partial class OpeningViewModel : BaseViewModel,IQueryAttributable
     {
-        public string YourObject { get; private set; }
+        private string email = "";
         private readonly UserService _userService;
         public OpeningViewModel()
         {
@@ -16,10 +16,22 @@ namespace Hospital.ViewModels
         }
         [ObservableProperty]
         public string scanText;
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
+
+        [ObservableProperty]
+        private string welcome;
+        public  void ApplyQueryAttributes(IDictionary<string, object> query)
         { 
-            ScanText = query["scanText"] as string;
-            //setPref();
+            if(query.ContainsKey("scanText"))
+            {
+                ScanText = query["scanText"] as string;
+                
+            }
+            if(query.ContainsKey("email"))
+            {
+                
+                email = query["email"] as string;
+                getNameOfUser();
+            }
         }
 
 
@@ -27,25 +39,20 @@ namespace Hospital.ViewModels
         private void OnLogoutClicked()
         {
             Debug.WriteLine("logout clicked");
+            ScanText = "Youre id";
             SecureStorage.Default.Remove("email");
             SecureStorage.Default.Remove("password");
             Preferences.Default.Remove("drawerID");
             Shell.Current.GoToAsync("///" + nameof(LoginnPage));
 
         }
-        [RelayCommand]
-        private async Task OnTestClicked()
+
+        private async Task getNameOfUser()
         {
-
-            var user = await _userService.Test("w");
-            Debug.WriteLine(user.email);
-
-
+            Debug.WriteLine(email);
+            var user = await _userService.Test(email);
+            Welcome = "Good after noon" + "\n" + user.firstName+ " " + user.lastName;
+           
         }
-        public void setPref()
-        {
-            Preferences.Default.Set("drawerID", ScanText);
-        }
-
     }
 }
