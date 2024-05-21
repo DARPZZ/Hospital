@@ -72,5 +72,27 @@ namespace Hospital.Services
                 return false;
             }
         }
+        public async Task<User> Test(string emaik)
+        {
+            using(var httpClient = new HttpClient())
+            {
+                var endpoint = baseString + "users/" + emaik;
+                var result = httpClient.GetAsync(endpoint).Result;
+                if(result.IsSuccessStatusCode)
+                {
+                    var json = await result.Content.ReadAsStringAsync();
+                    var user = JsonConvert.DeserializeObject<User>(json);
+                    return user;
+                }
+                else
+                {
+                    return null;
+                }
+                
+                
+                
+            }
+        }
+       
     }
 }

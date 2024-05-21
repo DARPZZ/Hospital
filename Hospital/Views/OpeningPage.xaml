@@ -12,6 +12,7 @@
             Placeholder="Youre id"
             IsReadOnly="True"
             HorizontalTextAlignment="Center"
+            Text="{Binding ScanText}"
             />
         <Button
             VerticalOptions="Center"
@@ -20,7 +21,7 @@
             FontAttributes="Bold"
             FontSize="Large"
             HorizontalOptions="Center"
-            Margin="0,150,0,0"
+            Margin="0,60,0,0"
             Text="Open drawer"
         />
         <Button
@@ -33,6 +34,14 @@
              Text="Log out"
              Command="{Binding LogoutClickedCommand}"
         />
+        <Button
+            VerticalOptions="Center"
+            Margin="0,40,0,0"
+            WidthRequest="150"
+            HeightRequest="50"
+            Text="Test"
+            Command="{Binding TestClickedCommand}"
+            />
     </StackLayout>
     
 
