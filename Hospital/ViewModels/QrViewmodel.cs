@@ -9,6 +9,7 @@ namespace Hospital.ViewModels
 {
     public partial class QrViewmodel :BaseViewModel
     {
+
         Feedback feedback = new Feedback();
         private string scannedText;
         public string ScannedText
@@ -48,5 +49,8 @@ namespace Hospital.ViewModels
             };
             Shell.Current.GoToAsync("///" + nameof(OpeningPage),false,navigationParameters);
         }
+
+       
     }
+
 }
