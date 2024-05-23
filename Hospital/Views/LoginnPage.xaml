@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Hospital.ViewModels"
              x:Class="Hospital.Views.LoginnPage"
+             xmlns:customControls="clr-namespace:Hospital.Services"
+
              x:DataType="vm:LoginnViewModel">
     <ContentPage.BindingContext>
         <vm:LoginnViewModel />
@@ -14,10 +16,13 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
+    
+
         <Path Margin="-2,-2,0,0"   Fill="Blue" Data="m0.30001,0l449,0l0,128.48327c-122.5,64.30167 -332.5,65.89076 -449,7.2429c0,-45.25313 0,-90.47304 0,-135.72617z"/>
         <StackLayout>
             <Frame BackgroundColor="SkyBlue" HeightRequest="60" WidthRequest="60" CornerRadius="30" Padding="0" Margin="0,100,0,0" HorizontalOptions="Center">
                 <Image Source="avatar.png" Aspect="AspectFill" Margin="0"/>
+                
             </Frame>
         </StackLayout>
 
@@ -43,6 +48,7 @@
                         <Entry Text="{Binding Username}" Placeholder="Username" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
                     </StackLayout>
                 </Frame>
+                
 
                 <Frame BackgroundColor="Transparent" Margin="0,25,0,0" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                     <StackLayout Orientation="Horizontal">
@@ -63,7 +69,19 @@
 
                 <Button Command="{Binding SingInClickedCommand}" Text="SIGN IN" BackgroundColor="LightGreen" TextColor="White" FontAttributes="Bold" HeightRequest="50" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0"/>
                 <Label Text="New user?" TextColor="DarkGray" FontSize="Medium" HorizontalTextAlignment="Center" Margin="0,20,0,0"/>
+                <StackLayout>
                 <Button Command="{Binding SignUpClickedCommand}" Text="SIGN UP" BackgroundColor="LightGreen" TextColor="White" FontAttributes="Bold" HeightRequest="50" CornerRadius="30" WidthRequest="200" FontSize="Small"/>
+                    
+                    
+                    <customControls:LoaderControl x:Name="loader"
+                     IndicatorColor="SkyBlue"                      
+                     VerticalOptions="Center"
+                     HorizontalOptions="Center"
+                     Opacity="{Binding IsLoading}"
+                        
+                    />
+                </StackLayout>
+
             </StackLayout>
         </Grid>
     </Grid>

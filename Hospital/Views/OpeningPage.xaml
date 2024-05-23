@@ -30,7 +30,8 @@
             FontSize="Large"
             HorizontalOptions="Center"
             Margin="0,125,0,0"
-            Text="Open drawer"
+            Command="{Binding OpenDrawerClickedCommand}"
+            Text="{Binding LockUpButtonText}"
         />
         <Button
              VerticalOptions="Center"

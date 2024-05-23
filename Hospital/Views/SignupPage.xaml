@@ -4,6 +4,7 @@
              xmlns:vm="clr-namespace:Hospital.ViewModels"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Hospital.Views.SignupPage"
+             xmlns:customControls="clr-namespace:Hospital.Services"
              x:DataType="vm:SignupViewModel">
 
     <ContentPage.Resources>
@@ -23,6 +24,8 @@
         </Grid.RowDefinitions>
 
         <Path Stroke="LightGreen" Fill="Blue" Data="m0.30001,0l449,0l0,128.48327c-122.5,64.30167 -332.5,65.89076 -449,7.2429c0,-45.25313 0,-90.47304 0,-135.72617z"/>
+    
+
         <StackLayout>
             <Frame BackgroundColor="SkyBlue" HeightRequest="60" WidthRequest="60" CornerRadius="30" Padding="0" Margin="0,100,0,0" HorizontalOptions="Center">
                 <Image Source="avatar.png" Aspect="AspectFill" Margin="0"/>
@@ -39,7 +42,7 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="1" Text="Welcome" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Padding="0" Margin="0"/>
+           
             <Label Grid.Row="2" Text="Sign up" HorizontalOptions="CenterAndExpand" FontSize="Subtitle"/>
 
             <StackLayout Grid.Row="3" Orientation="Vertical" HorizontalOptions="CenterAndExpand" Margin="0,0,0,0">
@@ -125,7 +128,18 @@
                     </StackLayout>
                     
                 </Frame>
+               
+
                 <Button Command="{Binding OkClickedCommand}"  Text="SIGN UP" BackgroundColor="LightGreen" TextColor="White" FontAttributes="Bold" HeightRequest="50" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0"/>
+                
+       
+                <customControls:LoaderControl x:Name="loader"
+                    IndicatorColor="SkyBlue"                      
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Opacity="{Binding IsLoading}"
+         
+                />      
             </StackLayout>
 
 
