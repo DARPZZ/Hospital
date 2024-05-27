@@ -64,7 +64,7 @@
                         <CheckBox  Margin="10,0,0,0" IsChecked="{Binding IsChecked, Mode=TwoWay}" />
                         <Label Text="Remember me" TextColor="DarkGray" FontSize="Small" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                     </StackLayout>
-                    <Label Text="Forgot Password" TextColor="Green" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    <Button Command="{Binding PasswordClickedCommand}" Text="Forgot Password" Background="Transparent" TextColor="Black" FontAttributes="Bold"/>
                 </StackLayout>
 
                 <Button Command="{Binding SingInClickedCommand}" Text="SIGN IN" BackgroundColor="LightGreen" TextColor="White" FontAttributes="Bold" HeightRequest="50" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0"/>

@@ -79,7 +79,7 @@ namespace Hospital.Services
             {
                 var endpoint = baseString + "users/" + emaik;
                 var result = httpClient.GetAsync(endpoint).Result;
-                if(result.IsSuccessStatusCode)
+                if (result.IsSuccessStatusCode)
                 {
                     var json = await result.Content.ReadAsStringAsync();
                     var user = JsonConvert.DeserializeObject<User>(json);
@@ -89,9 +89,6 @@ namespace Hospital.Services
                 {
                     return null;
                 }
-                
-                
-                
             }
         }
        

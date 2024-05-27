@@ -35,8 +35,14 @@ public static class MauiProgram
 		builder.Services.AddSingleton<OpeningViewModel>();
 
 		builder.Services.AddSingleton<OpeningPage>();
+
 		builder.Services.AddSingleton<QrViewmodel>();
+
 		builder.Services.AddSingleton<QrPage>();
+
+		builder.Services.AddSingleton<ForgotPasswordPage>();
+		
+		builder.Services.AddSingleton<ForgotPasswordViewModel>();
 
 
 		return builder.Build();

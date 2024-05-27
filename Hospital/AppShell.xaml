@@ -13,7 +13,12 @@
 		Icon="avatar.png"
 		ContentTemplate="{DataTemplate views:MainPage}"
 		Route="MainPage" />
-	<ShellContent
+    <ShellContent
+		Shell.NavBarIsVisible="False"
+		Title="Forgot password"
+		ContentTemplate="{DataTemplate views:ForgotPasswordPage}"
+		Route="ForgotPasswordPage" />
+    <ShellContent
 		Shell.NavBarIsVisible="False"
 		Title="Signup"
 		Icon="avatar.png"

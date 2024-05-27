@@ -23,7 +23,12 @@ public partial class LoginnViewModel : BaseViewModel
         IsLoading = 0;
         
     }
+    [RelayCommand]
+    private void OnPasswordClicked()
+    {
+        Shell.Current.GoToAsync("///" + nameof(ForgotPasswordPage));
 
+    }
     [RelayCommand]
     private void OnSignUpClicked()
     {

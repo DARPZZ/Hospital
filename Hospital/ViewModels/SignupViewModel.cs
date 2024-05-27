@@ -25,6 +25,7 @@ public partial class SignupViewModel : BaseViewModel
         _userService = new UserService();
         IsLoading = false;
     }
+ 
     [RelayCommand]
     private async Task OnBackClicked()
     {
