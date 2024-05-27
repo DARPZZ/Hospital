@@ -42,12 +42,13 @@ namespace Hospital.Services
         }
         public async Task<Drawer> GetIdOfUsersDrawer(string email)
         {
-            using (var httpClient = new HttpClient())
-            {
+            try
+            { 
                 var endpoint = baseString + "locks/email/" + email;
-                var result = httpClient.GetAsync(endpoint).Result;
+                var result = HttpClientSingleton.Client.GetAsync(endpoint).Result;
                 if (result.IsSuccessStatusCode)
                 {
+                    var cookies = HttpClientSingleton.Handler.CookieContainer.GetCookies(new Uri(baseString));
                     var json = await result.Content.ReadAsStringAsync();
                     Debug.WriteLine(json.ToString());
                     var drawer = JsonConvert.DeserializeObject<Drawer>(json);
@@ -59,7 +60,12 @@ namespace Hospital.Services
                     Debug.WriteLine("Mistake");
                     return null;
                 }
+            }catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
             }
+            return null;
+
         }
         public async Task<bool> OpenLockDrawer(Drawer drawer, string endpoint, string email)
         {

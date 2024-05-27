@@ -75,12 +75,14 @@ namespace Hospital.Services
 
         public async Task<User> Test(string emaik)
         {
-            using(var httpClient = new HttpClient())
+            try
             {
+
                 var endpoint = baseString + "users/" + emaik;
-                var result = httpClient.GetAsync(endpoint).Result;
+                var result = HttpClientSingleton.Client.GetAsync(endpoint).Result;
                 if (result.IsSuccessStatusCode)
                 {
+                    var cookies = HttpClientSingleton.Handler.CookieContainer.GetCookies(new Uri(baseString));
                     var json = await result.Content.ReadAsStringAsync();
                     var user = JsonConvert.DeserializeObject<User>(json);
                     return user;
@@ -89,7 +91,12 @@ namespace Hospital.Services
                 {
                     return null;
                 }
+            }catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
             }
+            return null;
+            
         }
        
     }

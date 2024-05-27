@@ -31,7 +31,7 @@ namespace Hospital.ViewModels
                 mail.Body = "You have requested a new password for youre account\n" +
                    $"Youre one time password is {result[0]} {result[1]} {result[3]}";
                 smtpClient.Port = 587;
-                smtpClient.Credentials = new System.Net.NetworkCredential("rasmushermansen490@gmail.com", "qtclopqypadnfuoa");
+                smtpClient.Credentials = new System.Net.NetworkCredential("rasmushermansen490@gmail.com", "");
                 smtpClient.EnableSsl = true;
 
                 smtpClient.Send(mail);
