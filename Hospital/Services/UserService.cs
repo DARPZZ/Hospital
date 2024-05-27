@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace Hospital.Services
 {
     public class UserService
     {
-        private readonly string baseString = "http://172.20.10.2:4000/";
+        private readonly string baseString = "http://10.176.69.179:4000/";
 
         public async Task<bool> CreateUserAsync(User user)
         {
@@ -51,19 +52,18 @@ namespace Hospital.Services
 
             try
             {
-                using (var httpClient = new HttpClient())
+                var response = await HttpClientSingleton.Client.PostAsync(url, content);
+                if (response.IsSuccessStatusCode)
                 {
-                    var response = await httpClient.PostAsync(url, content);
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        var errorContent = await response.Content.ReadAsStringAsync();
-                        Debug.WriteLine($"Error: {errorContent}");
-                        return false;
-                    }
+
+                    var cookies = HttpClientSingleton.Handler.CookieContainer.GetCookies(new Uri(baseString));
+                    return true;
+                }
+                else
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine($"Error: {errorContent}");
+                    return false;
                 }
             }
             catch (Exception ex)
@@ -72,6 +72,7 @@ namespace Hospital.Services
                 return false;
             }
         }
+
         public async Task<User> Test(string emaik)
         {
             using(var httpClient = new HttpClient())
