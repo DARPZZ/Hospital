@@ -10,14 +10,48 @@ namespace Hospital.ViewModels
 {
     public partial class ForgotPasswordViewModel :BaseViewModel
     {
+
         List<int> result = new List<int>();
+
+        [ObservableProperty]
+        private string specialCode;
+
         [ObservableProperty]
         private string mailText;
+
+        [ObservableProperty]
+        private double beforeOpa;
+
+        [ObservableProperty]
+        private double afterOpa;
+
+        public ForgotPasswordViewModel()
+        {
+            GenerateRandomNumber();
+           
+            BeforeOpa = 1;
+            AfterOpa = 0;
+        }
+
+        [RelayCommand]
+        private void OnConfirmClicked()
+        {
+            if (checkIfEqual())
+            {
+                Debug.WriteLine("They are equal");
+            }
+            else
+            {
+                Debug.WriteLine("Unable to set new password");
+            }
+        }
+
         [RelayCommand]
         private void OnSendEmailClicked()
         {
-           GenerateRandomNumber();
-           Sendmail();
+
+            AfterOpa = 1;
+            Sendmail();
         }
         private void Sendmail()
         {
@@ -28,8 +62,9 @@ namespace Hospital.ViewModels
                 mail.From = new MailAddress("rasmushermansen490@gmail.com");
                 mail.To.Add(MailText.ToString());
                 mail.Subject = "Password reset";
-                mail.Body = "You have requested a new password for youre account\n" +
-                   $"Youre one time password is {result[0]} {result[1]} {result[3]}";
+                mail.Body = "You have requested a new password for youre account<br />" +
+                   $"Youre one time password is<br /> <b>{result[0]}{result[1]}{result[3]}{result[4]}</b>";
+                mail.IsBodyHtml = true;
                 smtpClient.Port = 587;
                 smtpClient.Credentials = new System.Net.NetworkCredential("rasmushermansen490@gmail.com", "");
                 smtpClient.EnableSsl = true;
@@ -38,22 +73,37 @@ namespace Hospital.ViewModels
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
         }
+         
         private List<int> GenerateRandomNumber()
         {
-           
+            
             var random = new Random();
             for (int i = 0; i < 5; i++)
             {
                var num = random.Next(0, 9);
                result.Add(num);
             }
+           
             return result;
         }
-        private void check()
+
+        private bool checkIfEqual()
         {
+            char[] cArray = SpecialCode.ToCharArray();
+            List<int> cList = result.Select(c => (int)c).ToList();
+            bool areEqual = Enumerable.SequenceEqual(result, cList);
+            if (areEqual)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
 
         }
 

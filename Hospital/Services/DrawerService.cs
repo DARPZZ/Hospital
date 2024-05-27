@@ -19,9 +19,8 @@ namespace Hospital.Services
 
             try
             {
-                using (var httpClient = new HttpClient())
-                {
-                    var response = await httpClient.PostAsync(url, content);
+             
+                    var response = await HttpClientSingleton.Client.PostAsync(url, content);
                     if (response.IsSuccessStatusCode)
                     {
                         return true;
@@ -32,7 +31,6 @@ namespace Hospital.Services
                         Debug.WriteLine($"Error: {errorContent}");
                         return false;
                     }
-                }
             }
             catch (Exception ex)
             {
@@ -75,9 +73,8 @@ namespace Hospital.Services
 
             try
             {
-                using (var httpClient = new HttpClient())
-                {
-                    var response = await httpClient.PostAsync(url, content);
+              
+                    var response = await HttpClientSingleton.Client.PostAsync(url, content);
                     if (response.IsSuccessStatusCode)
                     {
                         return true;
@@ -88,7 +85,6 @@ namespace Hospital.Services
                         Debug.WriteLine($"Error: {errorContent}");
                         return false;
                     }
-                }
             }
             catch (Exception ex)
             {

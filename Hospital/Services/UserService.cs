@@ -91,13 +91,18 @@ namespace Hospital.Services
                 {
                     return null;
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
             return null;
-            
+
         }
-       
+        //public async Task<User> SetNewPassword(string email,string password)
+        //{
+        //    var endpoint = baseString + email +"/"  + password;
+        //    var result = HttpClientSingleton.Client.PatchAsync()
+        //}
     }
 }
