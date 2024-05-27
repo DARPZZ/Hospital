@@ -62,10 +62,9 @@ namespace Hospital.ViewModels
                 mail.From = new MailAddress("rasmushermansen490@gmail.com");
                 mail.To.Add(MailText.ToString());
                 mail.Subject = "Password reset";
-                mail.Body = "You have requested a new password for youre account<br />" +
-                   $"Youre one time password is<br /> <b>{result[0]}{result[1]}{result[3]}{result[4]}</b>";
+                mail.Body = mailBody();
                 mail.IsBodyHtml = true;
-                smtpClient.Port = 587;
+                smtpClient.Port = 587; 
                 smtpClient.Credentials = new System.Net.NetworkCredential("rasmushermansen490@gmail.com", "");
                 smtpClient.EnableSsl = true;
 
@@ -76,7 +75,25 @@ namespace Hospital.ViewModels
                 Debug.WriteLine(ex.ToString());
             }
         }
-         
+        private string mailBody()
+        {
+            var text = "<div style='font-family: Arial, sans-serif;'>" +
+                       "<h2 style='color: #2F4F4F;'>Password Reset Request</h2>" +
+                       $"<p>Dear <span style='color: #4682B4;'>{MailText}</span>,</p>" +
+                       "<p>We received a request to reset your password. Here is your security code:</p>" +
+                       $"<p style='font-size: 20px; color: #008B8B;'><b>{result[0]}{result[1]}{result[3]}{result[4]}</b></p>" +
+                       "<p>Please use this code to access your account and change your password.</p>" +
+                       "<p>If you did not request a password reset, please ignore this email or contact our support team.</p>" +
+                       "<p style='color: #2F4F4F;'>Best Regards,</p>" +
+                       "<p style='color: #2F4F4F;'><b>Kolding syghus</b></p>" +
+                       "<img src='https://www.nordichorse.dk/cdn/shop/articles/spiseroersforstoppelse_hest_895x.progressive.jpg?v=1667830689' alt='Kolding syghus' style='width:100%;height:auto;'>" +
+                       "</div>";
+
+            return text;
+        }
+
+
+
         private List<int> GenerateRandomNumber()
         {
             
