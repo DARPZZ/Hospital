@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 using Hospital.Models;
 using Hospital.Services;
-
+using DotNetEnv;
 namespace Hospital.ViewModels;
 
 public partial class LoginnViewModel : BaseViewModel
@@ -17,7 +17,6 @@ public partial class LoginnViewModel : BaseViewModel
     private string password;
     public LoginnViewModel()
     {
-      
         LogInAutomatic();
         _userService = new UserService();
         IsLoading = 0;
@@ -26,6 +25,7 @@ public partial class LoginnViewModel : BaseViewModel
     [RelayCommand]
     private void OnPasswordClicked()
     {
+
         Shell.Current.GoToAsync("///" + nameof(ForgotPasswordPage));
 
     }
