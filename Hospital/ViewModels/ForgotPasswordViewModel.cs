@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using Hospital.Services;
 
 namespace Hospital.ViewModels
 {
@@ -12,6 +13,11 @@ namespace Hospital.ViewModels
     {
 
         List<int> result = new List<int>();
+        [ObservableProperty]
+
+        private bool emailEntryEnabled;
+        [ObservableProperty]
+        private string newPassword;
 
         [ObservableProperty]
         private string specialCode;
@@ -25,32 +31,47 @@ namespace Hospital.ViewModels
         [ObservableProperty]
         private double afterOpa;
 
+        private readonly UserService _userService;
+
         public ForgotPasswordViewModel()
         {
             GenerateRandomNumber();
-           
+            _userService = new UserService();
             BeforeOpa = 1;
             AfterOpa = 0;
         }
 
         [RelayCommand]
-        private void OnConfirmClicked()
+        private async Task OnConfirmClicked()
         {
+            EmailEntryEnabled = false;
             if (checkIfEqual())
             {
-                Debug.WriteLine("They are equal");
+                try
+                {
+                    await _userService.SetNewPassword(MailText, NewPassword);
+                    await Shell.Current.GoToAsync(nameof(LoginnPage));
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                }
             }
             else
             {
-                Debug.WriteLine("Unable to set new password");
+                Debug.WriteLine("You have not entered the correct security number");
             }
+               
+
+         
         }
 
         [RelayCommand]
         private void OnSendEmailClicked()
         {
-
+            EmailEntryEnabled = true;
             AfterOpa = 1;
+
             Sendmail();
         }
         private void Sendmail()
@@ -59,7 +80,7 @@ namespace Hospital.ViewModels
             {
                 MailMessage mail = new MailMessage();
                 SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
-                mail.From = new MailAddress("rasmushermansen490@gmail.com");
+                mail.From = new MailAddress("ralle@gmail.com");
                 mail.To.Add(MailText.ToString());
                 mail.Subject = "Password reset";
                 mail.Body = mailBody();

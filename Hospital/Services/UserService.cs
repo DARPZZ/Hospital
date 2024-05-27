@@ -99,10 +99,26 @@ namespace Hospital.Services
             return null;
 
         }
-        //public async Task<User> SetNewPassword(string email,string password)
-        //{
-        //    var endpoint = baseString + email +"/"  + password;
-        //    var result = HttpClientSingleton.Client.PatchAsync()
-        //}
+        public async Task<User> SetNewPassword(string email, string password)
+        {
+            var endpoint = baseString + "users/" + email +"/" + "password";
+            
+            var jsonContent = new StringContent(JsonConvert.SerializeObject(new { password }), Encoding.UTF8, "application/json");
+            var response = await HttpClientSingleton.Client.PatchAsync(endpoint, jsonContent);
+            Debug.WriteLine(response.ToString());
+            if (response.IsSuccessStatusCode)
+            {
+                var cookies = HttpClientSingleton.Handler.CookieContainer.GetCookies(new Uri(baseString));
+                var userJson = await response.Content.ReadAsStringAsync();
+                var updatedUser = JsonConvert.DeserializeObject<User>(userJson);
+                
+                return updatedUser;
+            }
+            else
+            {
+                throw new Exception("Failed to update password");
+            }
+        }
+
     }
 }
