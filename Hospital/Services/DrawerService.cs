@@ -10,7 +10,7 @@ namespace Hospital.Services
 {
     public class DrawerService
     {
-        private readonly string baseString = "http://10.176.69.179:4000/";
+        private readonly string baseString = "http://172.20.10.2:4000/";
         public async Task<bool> SetDrawerToUser(Drawer drawer)
         {
             var url = baseString + "locks/user";

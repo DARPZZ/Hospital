@@ -94,28 +94,28 @@
                                     ValidStyle="{StaticResource ValidEntryStyle}"
                                     Flags="ValidateOnValueChanged">
 
-                                <toolkit:CharactersValidationBehavior 
+                                    <toolkit:CharactersValidationBehavior 
                                     x:Name="DigitValidation" 
                                     CharacterType="Digit" 
                                     MinimumCharacterTypeCount="1" 
                                     toolkit:MultiValidationBehavior.Error="1 digit" 
                                     RegexPattern="" />
 
-                                <toolkit:CharactersValidationBehavior 
+                                    <toolkit:CharactersValidationBehavior 
                                     x:Name="UpperValidation" 
                                     CharacterType="UppercaseLetter" 
                                     MinimumCharacterTypeCount="1" 
                                     toolkit:MultiValidationBehavior.Error="1 upper case" 
                                     RegexPattern="" />
 
-                                <toolkit:CharactersValidationBehavior 
+                                    <toolkit:CharactersValidationBehavior 
                                     x:Name="SymbolValidation" 
                                     CharacterType="NonAlphanumericSymbol" 
                                     MinimumCharacterTypeCount="1" 
                                     toolkit:MultiValidationBehavior.Error="1 symbol" 
                                     RegexPattern=""  />
 
-                                <toolkit:CharactersValidationBehavior 
+                                    <toolkit:CharactersValidationBehavior 
                                     x:Name="AnyValidation" 
                                     CharacterType="Any" 
                                     MinimumCharacterTypeCount="8" 
@@ -124,15 +124,12 @@
                                 </toolkit:MultiValidationBehavior>
                             </Entry.Behaviors>
                         </Entry>
-                        
-                    </StackLayout>
-                    
-                </Frame>
-               
 
+                    </StackLayout>
+
+
+                </Frame>
                 <Button Command="{Binding OkClickedCommand}"  Text="SIGN UP" BackgroundColor="LightGreen" TextColor="White" FontAttributes="Bold" HeightRequest="50" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0"/>
-                
-       
                 <customControls:LoaderControl x:Name="loader"
                     IndicatorColor="SkyBlue"                      
                     VerticalOptions="Center"
@@ -141,9 +138,12 @@
          
                 />      
             </StackLayout>
+            
 
 
 
         </Grid>
+   
     </Grid>
+    
 </ContentPage>

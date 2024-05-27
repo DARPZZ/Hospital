@@ -1,4 +1,6 @@
-﻿using Hospital.Models;
+﻿using System.Net.Mail;
+using System.Net;
+using Hospital.Models;
 using Hospital.Services;
 using Microsoft.VisualBasic;
 
@@ -6,15 +8,27 @@ namespace Hospital.ViewModels
 {
     public partial class OpeningViewModel : BaseViewModel,IQueryAttributable
     {
+        [ObservableProperty]
+        private string stateOfDrawer;
+        [ObservableProperty]
+        public string scanText;
+        [ObservableProperty]
+        private string lockUpButtonText;
+        [ObservableProperty]
+        private string welcome;
         Feedback feedback = new Feedback();
+
+
+
+        private string email = "";
+        private readonly UserService _userService;
+        private readonly DrawerService _drawerService;
         enum buttonOptions
         {
             open_drawer,
             close_drawer,
         }
-        private string email = "";
-        private readonly UserService _userService;
-        private readonly DrawerService _drawerService;
+ 
         public OpeningViewModel()
         {
             LockUpButtonText = buttonOptions.open_drawer.ToString();
@@ -22,13 +36,9 @@ namespace Hospital.ViewModels
             _drawerService = new DrawerService();
             string id = Preferences.Default.Get("drawerID", "Youre id");
             ScanText = id;
+            StateOfDrawer = "redball.png";
         }
-        [ObservableProperty]
-        public string scanText;
-        [ObservableProperty]
-        private string lockUpButtonText;
-        [ObservableProperty]
-        private string welcome;
+
         public  async void ApplyQueryAttributes(IDictionary<string, object> query)
         { 
             if(query.ContainsKey("scanText"))
@@ -45,10 +55,15 @@ namespace Hospital.ViewModels
                 email = query["email"] as string;
                 var toScanText = await GetTheDrawerId(email);
                 Debug.WriteLine(toScanText);
-                ScanText = "Youre id is:    " + toScanText.ToString();
-
+                if (toScanText.ToString().Equals("0"))
+                {
+                    ScanText = "Go to QR to assing a drawer to you";
+                }
+                else
+                {
+                    ScanText = "Youre drawer number is:    " + toScanText.ToString();
+                }
                 await getNameOfUser();
-                
             }
         }
 
@@ -68,21 +83,29 @@ namespace Hospital.ViewModels
         [RelayCommand]
         private async void OnOpenDrawerClicked()
         {
+
+
+
             feedback.StartHaptiskFeedback();
             GetTimeOfDay();
             var drawer = new Drawer
             {
                 email = email,
             };
+
+
             if (LockUpButtonText == buttonOptions.open_drawer.ToString())
             {
-                await _drawerService.OpenLockDrawer(drawer, "unlock", email);
                 LockUpButtonText = buttonOptions.close_drawer.ToString();
+                StateOfDrawer = "greenball";
+                await _drawerService.OpenLockDrawer(drawer, "unlock", email);
+
             }
             else if (LockUpButtonText == buttonOptions.close_drawer.ToString())
             {
-                await _drawerService.OpenLockDrawer(drawer, "lock", email);
                 LockUpButtonText = buttonOptions.open_drawer.ToString();
+                StateOfDrawer = "redball.png";
+                await _drawerService.OpenLockDrawer(drawer, "lock", email);
             }
 
 
@@ -93,8 +116,6 @@ namespace Hospital.ViewModels
            
             var user = await _userService.Test(email);
             Welcome = GetTimeOfDay()  + "\n" + user.firstName+ " " + user.lastName;
-            
-            
 
         }
         private async Task AssignDrawerIdToUser(int id, string email)
@@ -130,7 +151,8 @@ namespace Hospital.ViewModels
         {
             var current_time = DateTime.Now.ToString("HH");
             var intTme = int.Parse(current_time);
-            if ( intTme<5 && intTme<12)
+            
+            if ( intTme>5 && intTme<12)
             {
                 return "Good morning";
             }else if(intTme<12 && intTme < 18)
@@ -143,5 +165,7 @@ namespace Hospital.ViewModels
             }
             
         }
+
+            
     }
 }

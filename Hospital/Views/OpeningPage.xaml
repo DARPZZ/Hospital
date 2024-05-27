@@ -22,6 +22,7 @@
             HorizontalTextAlignment="Center"
             Text="{Binding ScanText}"
             />
+        <AbsoluteLayout VerticalOptions="Center" HorizontalOptions="Center">
         <Button
             VerticalOptions="Center"
             WidthRequest="250"
@@ -32,7 +33,17 @@
             Margin="0,125,0,0"
             Command="{Binding OpenDrawerClickedCommand}"
             Text="{Binding LockUpButtonText}"
+            BackgroundColor="#9b969c"
+            
         />
+        <Image
+            Margin="200,230,0,0"
+            Source="{Binding StateOfDrawer}"
+            WidthRequest="45"
+
+        />
+        </AbsoluteLayout>
+        
         <Button
              VerticalOptions="Center"
              WidthRequest="250"
@@ -42,8 +53,13 @@
              Margin="0,150,0,0"
              Text="Log out"
              Command="{Binding LogoutClickedCommand}"
+             BackgroundColor="#9b969c"
+            
         />
+        
+ 
     </StackLayout>
-    
+ 
+
 
 </ContentPage>

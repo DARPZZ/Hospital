@@ -29,13 +29,14 @@
 	<ShellContent
 		Shell.NavBarIsVisible="False"
 		Title="Opening"
-		Icon="avatar.png"
+        Icon="preview2.png"
 		ContentTemplate="{DataTemplate views:OpeningPage}"
+        
 		Route="OpeningPage" />
     <ShellContent
 		Shell.NavBarIsVisible="False"
-		Title="Qr"
-		Icon="avatar.png"
+		Title="QR" 
+        Icon="preview.png"
 		ContentTemplate="{DataTemplate views:QrPage}"
 		Route="QrPage" />
     </FlyoutItem>
