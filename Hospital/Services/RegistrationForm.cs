@@ -24,6 +24,7 @@ namespace Hospital.Services
             var context = new ValidationContext(this, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
             bool isValid = Validator.TryValidateObject(this, context, results, validateAllProperties: true);
+            
 
             if (!isValid)
                 return false;

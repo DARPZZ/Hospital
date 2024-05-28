@@ -42,7 +42,7 @@ public partial class SignupViewModel : BaseViewModel
     }
  
     [RelayCommand]
-    private async Task OnBackClicked()
+    private async Task OnBackToLoginClicked()
     {
         await Shell.Current.GoToAsync("///" + nameof(LoginnPage));
     }

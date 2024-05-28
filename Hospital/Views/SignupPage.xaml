@@ -133,13 +133,8 @@
 
                 </Frame>
                 <Button Command="{Binding OkClickedCommand}"  Text="SIGN UP" BackgroundColor="LightGreen" TextColor="White" FontAttributes="Bold" HeightRequest="50" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0"/>
-                <customControls:LoaderControl x:Name="loader"
-                    IndicatorColor="SkyBlue"                      
-                    VerticalOptions="Center"
-                    HorizontalOptions="Center"
-                    Opacity="{Binding IsLoading}"
-         
-                />      
+                <Button Command="{Binding BackToLoginClickedCommand}"  Text="Back to login" BackgroundColor="LightGreen" TextColor="White" FontAttributes="Bold" HeightRequest="50" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0"/>
+                     
             </StackLayout>
             
 

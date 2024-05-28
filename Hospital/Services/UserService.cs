@@ -12,7 +12,7 @@ namespace Hospital.Services
 {
     public class UserService
     {
-        private readonly string baseString = "http://10.176.69.179:4000/";
+        private readonly string baseString = "http://192.168.9.119:4000/";
 
         public async Task<bool> CreateUserAsync(User user)
         {
