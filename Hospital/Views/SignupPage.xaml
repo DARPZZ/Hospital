@@ -47,7 +47,7 @@
 
             <StackLayout Grid.Row="3" Orientation="Vertical" HorizontalOptions="CenterAndExpand" Margin="0,0,0,0">
 
-                <Frame BackgroundColor="Transparent" Margin="0,25,0,0" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                <Frame BackgroundColor="Transparent" Margin="0,25,0,0" BorderColor="{Binding StatusColor}" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                     <StackLayout Orientation="Horizontal">
                         <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
                             <Image BackgroundColor="Transparent" Source="signup.png" Aspect="AspectFill" Margin="0"/>
@@ -56,7 +56,7 @@
                     </StackLayout>
                 </Frame>
 
-                <Frame BackgroundColor="Transparent" Margin="0,25,0,20" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                <Frame BackgroundColor="Transparent" Margin="0,25,0,20" BorderColor="{Binding StatusColor}" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                     <StackLayout Orientation="Horizontal">
                         <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
                             <Image Source="signup.png" Aspect="AspectFill" Margin="0"/>
@@ -65,23 +65,25 @@
                     </StackLayout>
                 </Frame>
 
-                <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                <Frame BackgroundColor="Transparent" BorderColor="{Binding StatusColor}" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                     <StackLayout Orientation="Horizontal">
                         <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
                             <Image Source="avatar2.png" Aspect="AspectFill" Margin="0"/>
                         </Frame>
-                        <Entry Text="{Binding Email}" Placeholder="Email"  FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0">
+                        <Entry Text="{Binding Email}" Placeholder="Email"   FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0">
                             <Entry.Behaviors>
                                 <toolkit:EmailValidationBehavior 
                                     InvalidStyle="{StaticResource InvalidEntryStyle}"
                                     ValidStyle="{StaticResource ValidEntryStyle}"
-                                    Flags="ValidateOnValueChanged" />
+                                    
+                                    Flags="ValidateOnValueChanged"
+                                    />
                             </Entry.Behaviors>
                         </Entry>
                     </StackLayout>
                 </Frame>
 
-                <Frame BackgroundColor="Transparent" Margin="0,25,0,0" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                <Frame BackgroundColor="Transparent" Margin="0,25,0,0" BorderColor="{Binding StatusColor}" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                     <StackLayout Orientation="Horizontal">
                         <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
                             <Image Source="lock.png" Aspect="AspectFill" Margin="0"/>
