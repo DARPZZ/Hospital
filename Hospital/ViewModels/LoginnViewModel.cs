@@ -15,8 +15,12 @@ public partial class LoginnViewModel : BaseViewModel
     private string username;
     [ObservableProperty]
     private string password;
+
+    [ObservableProperty]
+    private Color failColor;
     public LoginnViewModel()
     {
+        FailColor = Color.FromRgb(144, 238, 144);
         LogInAutomatic();
         _userService = new UserService();
         IsLoading = 0;
@@ -38,6 +42,7 @@ public partial class LoginnViewModel : BaseViewModel
     [RelayCommand]
     private async Task OnSingInClicked()
     {
+        FailColor = Color.FromRgb(144, 238, 144);
         IsLoading = 1;
         var user = new User
         {
@@ -47,6 +52,7 @@ public partial class LoginnViewModel : BaseViewModel
         bool isCorrectCredentials = await _userService.LogUserInAsync(user);
         if (isCorrectCredentials)
         {
+            
             if (IsChecked != null)
             {
               await SecureStorage.SetAsync("email", Username);
@@ -65,6 +71,7 @@ public partial class LoginnViewModel : BaseViewModel
         }
         else
         {
+            FailColor = Color.FromRgb(255,0,0);
             IsLoading = 0;
             Debug.WriteLine("Not correct information");
         }

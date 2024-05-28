@@ -38,8 +38,16 @@ namespace Hospital.ViewModels
             GenerateRandomNumber();
             _userService = new UserService();
             BeforeOpa = 1;
-            AfterOpa = 0;
+            AfterOpa = 1;
         }
+
+        [RelayCommand]
+        private async Task OnBackToSignInClicked()
+        {
+            Debug.WriteLine("back");
+            await Shell.Current.GoToAsync("///" + nameof(LoginnPage));
+        }
+
 
         [RelayCommand]
         private async Task OnConfirmClicked()
@@ -50,7 +58,7 @@ namespace Hospital.ViewModels
                 try
                 {
                     await _userService.SetNewPassword(MailText, NewPassword);
-                    await Shell.Current.GoToAsync(nameof(LoginnPage));
+                    await Shell.Current.GoToAsync("///" + nameof(LoginnPage));
                 }
                 catch (Exception ex)
                 {

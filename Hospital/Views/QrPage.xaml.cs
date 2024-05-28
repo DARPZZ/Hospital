@@ -36,7 +36,7 @@ public partial class QrPage : ContentPage
     private void InitializeCamera()
     {
         cameraView.IsVisible = true;
-
+        
         cameraView.CameraLocation = CameraLocation.Front;
         cameraView.CameraLocation = CameraLocation.Rear;
         cameraView.IsEnabled = true;
@@ -46,6 +46,7 @@ public partial class QrPage : ContentPage
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
+        
         DeinitializeCamera();
     }
 

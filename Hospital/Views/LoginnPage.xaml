@@ -26,7 +26,7 @@
             </Frame>
         </StackLayout>
 
-        <Grid RowSpacing="5" Grid.Row="1" Margin="20,20,20,0">
+        <Grid RowSpacing="5" Grid.Row="1" Margin="20,0,20,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -40,7 +40,7 @@
             <Label Grid.Row="2" Text="Sign in to continue" HorizontalOptions="CenterAndExpand" FontSize="Subtitle"/>
 
             <StackLayout Grid.Row="3" Orientation="Vertical" HorizontalOptions="CenterAndExpand">
-                <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                <Frame BackgroundColor="Transparent" BorderColor="{Binding FailColor}" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                     <StackLayout Orientation="Horizontal">
                         <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
                             <Image Source="avatar2.png" Aspect="AspectFill" Margin="0"/>
@@ -48,9 +48,9 @@
                         <Entry Text="{Binding Username}" Placeholder="Email" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
                     </StackLayout>
                 </Frame>
-                
 
-                <Frame BackgroundColor="Transparent" Margin="0,25,0,0" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+
+                <Frame BackgroundColor="Transparent" Margin="0,25,0,0" BorderColor="{Binding FailColor}" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                     <StackLayout Orientation="Horizontal">
                         <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
                             <Image Source="lock.png" Aspect="AspectFill" Margin="0"/>

@@ -65,6 +65,9 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\arrow.png" />
 	  <None Remove="Resources\Images\avatar.png" />
+	  <None Remove="Resources\Images\flash.png" />
+	  <None Remove="Resources\Images\flashlightoff.png" />
+	  <None Remove="Resources\Images\flashlighton.png" />
 	  <None Remove="Resources\Images\greenball.png" />
 	  <None Remove="Resources\Images\lock.png" />
 	  <None Remove="Resources\Images\preview.png" />
