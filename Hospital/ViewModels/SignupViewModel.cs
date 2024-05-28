@@ -8,10 +8,12 @@ namespace Hospital.ViewModels;
 public partial class SignupViewModel : BaseViewModel
 {
     
+    
     [ObservableProperty]
     private Color statusColor;
 
     private readonly UserService _userService;
+    private readonly RegistrationForm _registrationForm;
 
     [ObservableProperty]
     private bool _isPasswordTooltipVisible;
@@ -35,6 +37,7 @@ public partial class SignupViewModel : BaseViewModel
     {
         StatusColor = Color.FromRgb(144, 238, 144);
         _userService = new UserService();
+        _registrationForm = new RegistrationForm();
         IsLoading = false;
     }
  
@@ -48,18 +51,31 @@ public partial class SignupViewModel : BaseViewModel
     {
         StatusColor = Color.FromRgb(144, 238, 144);
         IsLoading = true;
+        _registrationForm.Email = Email;
+        _registrationForm.Password = Password;
+        _registrationForm.FirstName = FirstName;
+        _registrationForm.LastName = LastName;
+
+        if (!_registrationForm.IsValid())
+        {
+            StatusColor = Color.FromRgb(255, 0, 0);
+            IsLoading = false;
+            return;
+        }
+
+       
         var user = new User
         {
-            email = Email,
-            password = Password,
-            firstName = FirstName,
-            lastName = LastName
+            email = _registrationForm.Email,
+            password = _registrationForm.Password,
+            firstName = _registrationForm.FirstName,
+            lastName = _registrationForm.LastName
         };
-        
+
         bool isCreated = await _userService.CreateUserAsync(user);
         if (isCreated)
         {
-            Debug.WriteLine("User registered successfully.");
+            
             IsLoading = false;
             await Shell.Current.GoToAsync("///" + nameof(LoginnPage));
         }
@@ -67,7 +83,7 @@ public partial class SignupViewModel : BaseViewModel
         {
             StatusColor = Color.FromRgb(255, 0, 0);
             IsLoading = false;
-            Debug.WriteLine("User registration failed.");
+           
         }
     }
 

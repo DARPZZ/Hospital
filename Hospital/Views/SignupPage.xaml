@@ -101,7 +101,8 @@
                                     CharacterType="Digit" 
                                     MinimumCharacterTypeCount="1" 
                                     toolkit:MultiValidationBehavior.Error="1 digit" 
-                                    RegexPattern="" />
+                                    RegexPattern=""
+                                        />
 
                                     <toolkit:CharactersValidationBehavior 
                                     x:Name="UpperValidation" 
