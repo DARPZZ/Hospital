@@ -9,7 +9,7 @@ using Hospital.Services;
 
 namespace Hospital.ViewModels
 {
-    public partial class ForgotPasswordViewModel :BaseViewModel
+    public partial class ForgotPasswordViewModel : BaseViewModel
     {
 
         List<int> result = new List<int>();
@@ -69,9 +69,9 @@ namespace Hospital.ViewModels
             {
                 Debug.WriteLine("You have not entered the correct security number");
             }
-               
 
-         
+
+
         }
 
         [RelayCommand]
@@ -93,7 +93,7 @@ namespace Hospital.ViewModels
                 mail.Subject = "Password reset";
                 mail.Body = mailBody();
                 mail.IsBodyHtml = true;
-                smtpClient.Port = 587; 
+                smtpClient.Port = 587;
                 smtpClient.Credentials = new System.Net.NetworkCredential("rasmushermansen490@gmail.com", "");
                 smtpClient.EnableSsl = true;
 
@@ -125,14 +125,14 @@ namespace Hospital.ViewModels
 
         private List<int> GenerateRandomNumber()
         {
-            
+
             var random = new Random();
             for (int i = 0; i < 5; i++)
             {
-               var num = random.Next(0, 9);
-               result.Add(num);
+                var num = random.Next(0, 9);
+                result.Add(num);
             }
-           
+
             return result;
         }
 

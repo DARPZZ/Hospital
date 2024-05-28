@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
@@ -101,24 +102,47 @@ namespace Hospital.Services
         }
         public async Task<User> SetNewPassword(string email, string password)
         {
-            var endpoint = baseString + "users/" + email +"/" + "password";
-            
+            var endpoint = baseString + "users/" + email + "/" + "password";
+
             var jsonContent = new StringContent(JsonConvert.SerializeObject(new { password }), Encoding.UTF8, "application/json");
             var response = await HttpClientSingleton.Client.PatchAsync(endpoint, jsonContent);
             Debug.WriteLine(response.ToString());
+
             if (response.IsSuccessStatusCode)
             {
-                var cookies = HttpClientSingleton.Handler.CookieContainer.GetCookies(new Uri(baseString));
-                var userJson = await response.Content.ReadAsStringAsync();
-                var updatedUser = JsonConvert.DeserializeObject<User>(userJson);
-                
-                return updatedUser;
+                var responseContent = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine(responseContent);
+
+
+
+                if (response.Content.Headers.ContentType.MediaType == "application/json")
+                {
+                    var updatedUser = JsonConvert.DeserializeObject<User>(responseContent);
+                    return updatedUser;
+                }
+                else if (response.Content.Headers.ContentType.MediaType == "text/html")
+                {
+                    if (responseContent.Contains("Password successfully changed"))
+                    {
+                        
+                        return new User { email = email };
+                    }
+                    else
+                    {
+                        throw new Exception("Unexpected response content");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Unsupported response content type");
+                }
             }
             else
             {
                 throw new Exception("Failed to update password");
             }
         }
+
 
     }
 }

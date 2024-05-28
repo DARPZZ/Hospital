@@ -147,7 +147,7 @@ namespace Hospital.ViewModels
             }
             
         }
-        private string GetTimeOfDay()
+        private  string GetTimeOfDay()
         {
             var current_time = DateTime.Now.ToString("HH");
             var intTme = int.Parse(current_time);
