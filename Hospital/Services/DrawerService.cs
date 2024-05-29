@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hospital.Models;
+using Hospital.Services.Interfaces;
 using Newtonsoft.Json;
 
 namespace Hospital.Services
 {
-    public class DrawerService
+    public class DrawerService : IDrawerService
     {
         //private readonly string baseString = "http://179.61.246.200:4000/";
        
