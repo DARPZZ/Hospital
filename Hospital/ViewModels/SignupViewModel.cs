@@ -33,11 +33,11 @@ public partial class SignupViewModel : BaseViewModel
     [ObservableProperty]
     private bool isLoading;
 
-    public SignupViewModel()
+    public SignupViewModel(UserService userService, RegistrationForm registrationForm)
     {
         StatusColor = Color.FromRgb(144, 238, 144);
-        _userService = new UserService();
-        _registrationForm = new RegistrationForm();
+        _userService = userService;
+        _registrationForm = registrationForm;
         IsLoading = false;
     }
  
@@ -47,7 +47,7 @@ public partial class SignupViewModel : BaseViewModel
         await Shell.Current.GoToAsync("///" + nameof(LoginnPage));
     }
     [RelayCommand]
-    private async Task OnOkClicked()
+    private async Task OnSignupClicked()
     {
         StatusColor = Color.FromRgb(144, 238, 144);
         IsLoading = true;

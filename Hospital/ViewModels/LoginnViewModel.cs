@@ -31,6 +31,8 @@ public partial class LoginnViewModel : BaseViewModel
     {
 
         Shell.Current.GoToAsync("///" + nameof(ForgotPasswordPage));
+        
+
 
     }
     [RelayCommand]

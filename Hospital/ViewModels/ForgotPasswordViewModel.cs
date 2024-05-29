@@ -33,12 +33,12 @@ namespace Hospital.ViewModels
 
         private readonly UserService _userService;
 
-        public ForgotPasswordViewModel()
+        public ForgotPasswordViewModel(UserService userService)
         {
+            _userService = userService;
             GenerateRandomNumber();
-            _userService = new UserService();
             BeforeOpa = 1;
-            AfterOpa = 1;
+            AfterOpa = 0;
         }
 
         [RelayCommand]
@@ -94,7 +94,7 @@ namespace Hospital.ViewModels
                 mail.Body = mailBody();
                 mail.IsBodyHtml = true;
                 smtpClient.Port = 587;
-                smtpClient.Credentials = new System.Net.NetworkCredential("rasmushermansen490@gmail.com", "");
+                smtpClient.Credentials = new System.Net.NetworkCredential("rasmushermansen490@gmail.com", "rawltauoiekdhhiw");
                 smtpClient.EnableSsl = true;
 
                 smtpClient.Send(mail);

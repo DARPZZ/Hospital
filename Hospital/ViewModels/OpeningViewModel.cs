@@ -21,19 +21,19 @@ namespace Hospital.ViewModels
 
 
         private string email = "";
-        private readonly UserService _userService;
-        private readonly DrawerService _drawerService;
+        readonly  UserService _userService;
+        readonly  DrawerService _drawerService;
         enum buttonOptions
         {
             open_drawer,
             close_drawer,
         }
  
-        public OpeningViewModel()
+        public OpeningViewModel(UserService userService, DrawerService drawerService)
         {
             LockUpButtonText = buttonOptions.open_drawer.ToString();
-            _userService = new UserService();
-            _drawerService = new DrawerService();
+            _userService = userService;
+            _drawerService = drawerService;
             string id = Preferences.Default.Get("drawerID", "Youre id");
             ScanText = id;
             StateOfDrawer = "redball.png";

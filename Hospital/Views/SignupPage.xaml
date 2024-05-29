@@ -132,7 +132,7 @@
 
 
                 </Frame>
-                <Button Command="{Binding OkClickedCommand}"  Text="SIGN UP" BackgroundColor="LightGreen" TextColor="White" FontAttributes="Bold" HeightRequest="50" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0"/>
+                <Button Command="{Binding SignupClickedCommand}"  Text="SIGN UP" BackgroundColor="LightGreen" TextColor="White" FontAttributes="Bold" HeightRequest="50" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0"/>
                 <Button Command="{Binding BackToLoginClickedCommand}"  Text="Back to login" BackgroundColor="LightGreen" TextColor="White" FontAttributes="Bold" HeightRequest="50" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0"/>
                      
             </StackLayout>

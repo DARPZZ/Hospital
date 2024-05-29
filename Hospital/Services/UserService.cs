@@ -1,8 +1,5 @@
-﻿
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics;
-using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +8,10 @@ using Newtonsoft.Json;
 
 namespace Hospital.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
-        private readonly string baseString = "http://192.168.9.119:4000/";
+        //private readonly string baseString = "http://179.61.246.200:4000/";
+        private readonly string baseString = "http://10.176.69.179:4000/";
 
         public async Task<bool> CreateUserAsync(User user)
         {
@@ -56,7 +54,6 @@ namespace Hospital.Services
                 var response = await HttpClientSingleton.Client.PostAsync(url, content);
                 if (response.IsSuccessStatusCode)
                 {
-
                     var cookies = HttpClientSingleton.Handler.CookieContainer.GetCookies(new Uri(baseString));
                     return true;
                 }
@@ -74,12 +71,11 @@ namespace Hospital.Services
             }
         }
 
-        public async Task<User> Test(string emaik)
+        public async Task<User> Test(string email)
         {
             try
             {
-
-                var endpoint = baseString + "users/" + emaik;
+                var endpoint = baseString + "users/" + email;
                 var result = HttpClientSingleton.Client.GetAsync(endpoint).Result;
                 if (result.IsSuccessStatusCode)
                 {
@@ -98,8 +94,8 @@ namespace Hospital.Services
                 Debug.WriteLine(ex.Message);
             }
             return null;
-
         }
+
         public async Task<User> SetNewPassword(string email, string password)
         {
             var endpoint = baseString + "users/" + email + "/" + "password";
@@ -119,6 +115,5 @@ namespace Hospital.Services
                 throw new Exception("Failed to update password");
             }
         }
-
     }
 }

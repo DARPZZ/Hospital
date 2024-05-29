@@ -14,7 +14,7 @@ namespace Hospital.Models
         public string lastName { get; set; }
         public User()
         {
-            
+
         }
 
         public User(string email, string password, string firstName, string lastName)

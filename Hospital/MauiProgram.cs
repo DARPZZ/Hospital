@@ -1,5 +1,6 @@
 ﻿using ZXing.Net.Maui.Controls;
 using ZXing.Net.Maui;
+using Hospital.Services;
 namespace Hospital;
 
 public static class MauiProgram
@@ -40,10 +41,15 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<QrPage>();
 
-		builder.Services.AddSingleton<ForgotPasswordPage>();
-		
-		builder.Services.AddSingleton<ForgotPasswordViewModel>();
+        builder.Services.AddSingleton<DrawerService>();
 
+        builder.Services.AddSingleton<ForgotPasswordPage>();
+
+        builder.Services.AddSingleton<UserService>();
+
+		builder.Services.AddSingleton<RegistrationForm>();
+
+        builder.Services.AddSingleton<ForgotPasswordViewModel>();
 
 		return builder.Build();
 	}
