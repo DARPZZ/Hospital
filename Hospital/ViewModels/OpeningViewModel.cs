@@ -54,7 +54,7 @@ namespace Hospital.ViewModels
                 
                 email = query["email"] as string;
                 var toScanText = await GetTheDrawerId(email);
-                Debug.WriteLine(toScanText);
+                
                 if (toScanText.ToString().Equals("0"))
                 {
                     ScanText = "Go to QR to assing a drawer to you";
@@ -71,7 +71,6 @@ namespace Hospital.ViewModels
         [RelayCommand]
         private void OnLogoutClicked()
         {
-            Debug.WriteLine("logout clicked");
             ScanText = "Youre id";
             SecureStorage.Default.Remove("email");
             SecureStorage.Default.Remove("password");
@@ -83,9 +82,6 @@ namespace Hospital.ViewModels
         [RelayCommand]
         private async void OnOpenDrawerClicked()
         {
-
-
-
             feedback.StartHaptiskFeedback();
             GetTimeOfDay();
             var drawer = new Drawer
@@ -114,7 +110,7 @@ namespace Hospital.ViewModels
         private async Task getNameOfUser()
         {
            
-            var user = await _userService.Test(email);
+            var user = await _userService.GetUserByEmail(email);
             Welcome = GetTimeOfDay()  + "\n" + user.firstName+ " " + user.lastName;
 
         }

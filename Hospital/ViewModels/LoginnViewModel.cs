@@ -18,22 +18,18 @@ public partial class LoginnViewModel : BaseViewModel
 
     [ObservableProperty]
     private Color failColor;
-    public LoginnViewModel()
+    public LoginnViewModel(UserService userService)
     {
         FailColor = Color.FromRgb(144, 238, 144);
         LogInAutomatic();
-        _userService = new UserService();
+        _userService = userService;
         IsLoading = 0;
         
     }
     [RelayCommand]
     private void OnPasswordClicked()
     {
-
         Shell.Current.GoToAsync("///" + nameof(ForgotPasswordPage));
-        
-
-
     }
     [RelayCommand]
     private void OnSignUpClicked()
@@ -52,7 +48,7 @@ public partial class LoginnViewModel : BaseViewModel
             password = Password
         };
         bool isCorrectCredentials = await _userService.LogUserInAsync(user);
-        if (isCorrectCredentials)
+        if (isCorrectCredentials) 
         {
             
             if (IsChecked != null)
@@ -66,7 +62,7 @@ public partial class LoginnViewModel : BaseViewModel
                 { "email", Username },
             };
 
-            clearFeilds();
+            ClearFeilds();
             await Shell.Current.GoToAsync("///" + nameof(OpeningPage),false,navigationParameters);
             IsLoading = 0;
             
@@ -106,7 +102,7 @@ public partial class LoginnViewModel : BaseViewModel
             }
         }
     }
-    public void clearFeilds()
+    public void ClearFeilds()
     {
         Username = "";
         Password = "";

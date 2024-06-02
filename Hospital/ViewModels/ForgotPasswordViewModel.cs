@@ -82,8 +82,9 @@ namespace Hospital.ViewModels
 
             Sendmail();
         }
-        private void Sendmail()
+        private async Task Sendmail()
         {
+
             try
             {
                 MailMessage mail = new MailMessage();
@@ -91,20 +92,20 @@ namespace Hospital.ViewModels
                 mail.From = new MailAddress("ralle@gmail.com");
                 mail.To.Add(MailText.ToString());
                 mail.Subject = "Password reset";
-                mail.Body = mailBody();
+                mail.Body = MailBody();
                 mail.IsBodyHtml = true;
                 smtpClient.Port = 587;
                 smtpClient.Credentials = new System.Net.NetworkCredential("rasmushermansen490@gmail.com", "rawltauoiekdhhiw");
                 smtpClient.EnableSsl = true;
 
-                smtpClient.Send(mail);
+                await Task.Run(() => smtpClient.Send(mail));
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
             }
         }
-        private string mailBody()
+        private string MailBody()
         {
             var text = "<div style='font-family: Arial, sans-serif;'>" +
                        "<h2 style='color: #2F4F4F;'>Password Reset Request</h2>" +

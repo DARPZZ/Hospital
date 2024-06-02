@@ -11,7 +11,7 @@ namespace Hospital.Services
     {
         Task<bool> CreateUserAsync(User user);
         Task<bool> LogUserInAsync(User user);
-        Task<User> Test(string email);
+        Task<User> GetUserByEmail(string email);
         Task<User> SetNewPassword(string email, string password);
     }
 }
