@@ -11,9 +11,9 @@ namespace Hospital.Services
 {
     public class DrawerService : IDrawerService
     {
-        //private readonly string baseString = "http://179.61.246.200:4000/";
+        private readonly string baseString = "http://179.61.246.200:4000/";
        
-        private readonly string baseString = "http://10.176.69.179:4000/";
+        //private readonly string baseString = "http://10.176.69.179:4000/";
         public async Task<bool> SetDrawerToUser(Drawer drawer)
         {
             var url = baseString + "locks/user";
@@ -22,7 +22,6 @@ namespace Hospital.Services
 
             try
             {
-             
                     var response = await HttpClientSingleton.Client.PostAsync(url, content);
                     if (response.IsSuccessStatusCode)
                     {

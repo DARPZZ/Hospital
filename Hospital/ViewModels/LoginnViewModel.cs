@@ -26,6 +26,10 @@ public partial class LoginnViewModel : BaseViewModel
         IsLoading = 0;
         
     }
+    public LoginnViewModel()
+    {
+        
+    }
     [RelayCommand]
     private void OnPasswordClicked()
     {
