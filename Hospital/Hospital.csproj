@@ -38,10 +38,10 @@
 	<ItemGroup>
 		<!-- App Icon -->
 		<!--<MauiIcon Include="Resources\Raw\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />-->
-
+	
 		<!-- Splash Screen -->
 		<!--<MauiSplashScreen Include="Resources\Raw\splash.svg" Color="#512BD4" BaseSize="128,128" />-->
-
+		<MauiSplashScreen Include="Resources\Splash\hospi.png" Color="#A020F0" />
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
@@ -51,15 +51,6 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <AndroidResource Remove="Resources\NewFolder\**" />
-	  <Compile Remove="Resources\NewFolder\**" />
-	  <EmbeddedResource Remove="Resources\NewFolder\**" />
-	  <MauiCss Remove="Resources\NewFolder\**" />
-	  <MauiXaml Remove="Resources\NewFolder\**" />
-	  <None Remove="Resources\NewFolder\**" />
 	</ItemGroup>
 
 	<ItemGroup>
