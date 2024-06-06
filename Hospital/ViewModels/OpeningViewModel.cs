@@ -3,6 +3,7 @@ using System.Net;
 using Hospital.Models;
 using Hospital.Services;
 using Microsoft.VisualBasic;
+using Hospital.Services.Interfaces;
 
 namespace Hospital.ViewModels
 {
@@ -23,6 +24,9 @@ namespace Hospital.ViewModels
         private string email = "";
         readonly  UserService _userService;
         readonly  DrawerService _drawerService;
+        readonly IPreferencesService _preferencesService;
+        readonly IUserService us;
+        readonly IDrawerService ds;
         enum buttonOptions
         {
             open_drawer,
@@ -35,6 +39,16 @@ namespace Hospital.ViewModels
             _userService = userService;
             _drawerService = drawerService;
             string id = Preferences.Default.Get("drawerID", "Youre id");
+            ScanText = id;
+            StateOfDrawer = "redball.png";
+        }
+        public OpeningViewModel(IUserService userService, IDrawerService drawerService, IPreferencesService preferencesService)
+        {
+            LockUpButtonText = buttonOptions.open_drawer.ToString();
+            us = userService;
+            ds = drawerService;
+            _preferencesService = preferencesService;
+            string id = _preferencesService.Get("drawerID", "Your id");
             ScanText = id;
             StateOfDrawer = "redball.png";
         }
