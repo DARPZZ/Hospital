@@ -1,6 +1,7 @@
 ﻿using ZXing.Net.Maui.Controls;
 using ZXing.Net.Maui;
 using Hospital.Services;
+using Plugin.LocalNotification;
 namespace Hospital;
 
 public static class MauiProgram
@@ -12,6 +13,7 @@ public static class MauiProgram
 			.UseMauiApp<App>()
             .UseBarcodeReader()
             .UseMauiCommunityToolkit()
+			.UseLocalNotification()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("FontAwesome6FreeBrands.otf", "FontAwesomeBrands");

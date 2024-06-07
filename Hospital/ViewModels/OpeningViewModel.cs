@@ -4,6 +4,7 @@ using Hospital.Models;
 using Hospital.Services;
 using Microsoft.VisualBasic;
 using Hospital.Services.Interfaces;
+using Plugin.LocalNotification;
 
 namespace Hospital.ViewModels
 {
@@ -41,6 +42,7 @@ namespace Hospital.ViewModels
             string id = Preferences.Default.Get("drawerID", "Youre id");
             ScanText = id;
             StateOfDrawer = "redball.png";
+            
         }
         public OpeningViewModel(IUserService userService, IDrawerService drawerService, IPreferencesService preferencesService)
         {
@@ -96,6 +98,7 @@ namespace Hospital.ViewModels
         [RelayCommand]
         private async void OnOpenDrawerClicked()
         {
+            
             feedback.StartHaptiskFeedback();
             GetTimeOfDay();
             var drawer = new Drawer
@@ -106,6 +109,7 @@ namespace Hospital.ViewModels
 
             if (LockUpButtonText == buttonOptions.open_drawer.ToString())
             {
+                PushNotification("start");
                 LockUpButtonText = buttonOptions.close_drawer.ToString();
                 StateOfDrawer = "greenball";
                 await _drawerService.OpenLockDrawer(drawer, "unlock", email);
@@ -113,6 +117,7 @@ namespace Hospital.ViewModels
             }
             else if (LockUpButtonText == buttonOptions.close_drawer.ToString())
             {
+                PushNotification("close");
                 LockUpButtonText = buttonOptions.open_drawer.ToString();
                 StateOfDrawer = "redball.png";
                 await _drawerService.OpenLockDrawer(drawer, "lock", email);
@@ -175,7 +180,29 @@ namespace Hospital.ViewModels
             }
             
         }
+        public void PushNotification(string mode)
+        {
+            if (mode == "start")
+            {
+                var request = new NotificationRequest
+                {
+                    Title = "Åben skuffe",
+                    Subtitle = "Åben skuffe",
+                    Description = "Skuffen er åben! Din skattekiste venter på dine værdigenstande. Bare rolig, den stjæler dem ikke!",
+                    BadgeNumber = 42,
+                    NotificationId  = 69,
+                    Schedule = new NotificationRequestSchedule
+                    {
+                        NotifyTime = DateTime.Now.AddSeconds(10),
 
-            
+                    },
+                };
+                LocalNotificationCenter.Current.Show(request);
+            }
+            else
+            {
+                LocalNotificationCenter.Current.Cancel(69);
+            }
+        }
     }
 }

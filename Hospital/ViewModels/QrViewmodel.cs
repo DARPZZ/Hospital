@@ -31,7 +31,7 @@ namespace Hospital.ViewModels
                 OnScannedTextChanged();
             }
         }
-
+        // Turning on and off flashlight
         [RelayCommand]
         public void OnPrintTextClicked()
         {
