@@ -95,7 +95,7 @@ namespace Hospital.ViewModels
                 mail.Body = MailBody();
                 mail.IsBodyHtml = true;
                 smtpClient.Port = 587;
-                smtpClient.Credentials = new System.Net.NetworkCredential("rasmushermansen490@gmail.com", "rawltauoiekdhhiw");
+                smtpClient.Credentials = new System.Net.NetworkCredential("rasmushermansen490@gmail.com", "tgeydvbmtyqcyoho");
                 smtpClient.EnableSsl = true;
 
                 await Task.Run(() => smtpClient.Send(mail));
@@ -115,8 +115,8 @@ namespace Hospital.ViewModels
                        "<p>Please use this code to access your account and change your password.</p>" +
                        "<p>If you did not request a password reset, please ignore this email or contact our support team.</p>" +
                        "<p style='color: #2F4F4F;'>Best Regards,</p>" +
-                       "<p style='color: #2F4F4F;'><b>Kolding syghus</b></p>" +
-                       "<img src='https://www.nordichorse.dk/cdn/shop/articles/spiseroersforstoppelse_hest_895x.progressive.jpg?v=1667830689' alt='Kolding syghus' style='width:100%;height:auto;'>" +
+                       "<p style='color: #2F4F4F;'><b>Hospi Lock</b></p>" +
+                       "<a href=\"https://imgbb.com/\"><img src=\"https://i.ibb.co/WzYCB7S/Hospilock-PNG-Cropped.png\" alt=\"Hospilock-PNG-Cropped\"></a>" +
                        "</div>";
 
             return text;
