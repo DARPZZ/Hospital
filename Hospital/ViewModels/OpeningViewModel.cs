@@ -188,7 +188,7 @@ namespace Hospital.ViewModels
                 {
                     Title = "Åben skuffe",
                     Subtitle = "Åben skuffe",
-                    Description = "Skuffen er åben! Din skattekiste venter på dine værdigenstande. Bare rolig, den stjæler dem ikke!",
+                    Description = "🔔 \"Pssst! Har du husket at lukke skabet?",
                     BadgeNumber = 42,
                     NotificationId  = 69,
                     Schedule = new NotificationRequestSchedule

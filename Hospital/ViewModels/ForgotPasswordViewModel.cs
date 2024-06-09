@@ -89,7 +89,7 @@ namespace Hospital.ViewModels
             {
                 MailMessage mail = new MailMessage();
                 SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
-                mail.From = new MailAddress("ralle@gmail.com");
+                mail.From = new MailAddress("rasmushermansen490@gmail.com");
                 mail.To.Add(MailText.ToString());
                 mail.Subject = "Password reset";
                 mail.Body = MailBody();
