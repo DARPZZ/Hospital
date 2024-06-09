@@ -87,6 +87,7 @@ namespace Hospital.ViewModels
         [RelayCommand]
         private void OnLogoutClicked()
         {
+            LockUpButtonText = buttonOptions.open_drawer.ToString();
             ScanText = "Youre id";
             SecureStorage.Default.Remove("email");
             SecureStorage.Default.Remove("password");
