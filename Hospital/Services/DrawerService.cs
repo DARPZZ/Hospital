@@ -11,9 +11,9 @@ namespace Hospital.Services
 {
     public class DrawerService : IDrawerService
     {
-        //private readonly string baseString = "http://srv534529.hstgr.cloud:4000/";
+        private readonly string baseString = "http://srv534529.hstgr.cloud:4000/";
        
-        private readonly string baseString = "http://10.176.69.180:4000/";
+        //private readonly string baseString = "http://10.176.69.180:4000/";
         public async Task<bool> SetDrawerToUser(Drawer drawer)
         {
             var url = baseString + "locks/user";
@@ -42,15 +42,13 @@ namespace Hospital.Services
         }
         public async Task<Drawer> GetIdOfUsersDrawer(string email)
         {
-            try
-            { 
                 var endpoint = baseString + "locks/email/" + email;
                 var result = HttpClientSingleton.Client.GetAsync(endpoint).Result;
                 if (result.IsSuccessStatusCode)
                 {
                     var cookies = HttpClientSingleton.Handler.CookieContainer.GetCookies(new Uri(baseString));
                     var json = await result.Content.ReadAsStringAsync();
-                    Debug.WriteLine(json.ToString());
+                    Debug.WriteLine(json.ToString()+ "hest");
                     var drawer = JsonConvert.DeserializeObject<Drawer>(json);
                     
                     return drawer;
@@ -60,11 +58,8 @@ namespace Hospital.Services
                     Debug.WriteLine("Mistake");
                     return null;
                 }
-            }catch(Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-            return null;
+
+            
 
         }
         public async Task<bool> OpenLockDrawer(Drawer drawer, string endpoint, string email)

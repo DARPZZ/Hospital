@@ -11,6 +11,7 @@ namespace Hospital.Models
         public string email { get; set; }
         public int id { get; set; }
         public string? ip { get; set; }
+        public string? status { get; set; }
         public Drawer()
         {
             
@@ -21,9 +22,12 @@ namespace Hospital.Models
             this.email = email;
         }
 
-
-
-       
- 
+        public Drawer(string email, int id, string? ip, string? status)
+        {
+            this.email = email;
+            this.id = id;
+            this.ip = ip;
+            this.status = status;
+        }
     }
 }

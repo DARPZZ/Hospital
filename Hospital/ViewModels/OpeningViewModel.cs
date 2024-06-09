@@ -59,18 +59,15 @@ namespace Hospital.ViewModels
         { 
             if(query.ContainsKey("scanText"))
             {
-                ScanText = query["scanText"] as string;
+                ScanText =  query["scanText"] as string;
                 var hest = int.Parse(ScanText);
                 await AssignDrawerIdToUser(hest, email);
 
             }
             if(query.ContainsKey("email"))
             {
-                
-                
                 email = query["email"] as string;
                 var toScanText = await GetTheDrawerId(email);
-                
                 if (toScanText.ToString().Equals("0"))
                 {
                     ScanText = "Go to QR to assing a drawer to you";
@@ -146,7 +143,7 @@ namespace Hospital.ViewModels
             bool isCreated = await _drawerService.SetDrawerToUser(drawer);
             if (isCreated)
             {Debug.WriteLine("Drawer was placed sucessfully ");}
-            else {Debug.WriteLine("drawer failed.");}
+            else { ScanText = "A user is allready assigned to that drawer";}
         }
         private async Task<int> GetTheDrawerId(string email)
         {
