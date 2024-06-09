@@ -95,7 +95,7 @@ namespace Hospital.ViewModels
                 mail.Body = MailBody();
                 mail.IsBodyHtml = true;
                 smtpClient.Port = 587;
-                smtpClient.Credentials = new System.Net.NetworkCredential("rasmushermansen490@gmail.com", "tgeydvbmtyqcyoho");
+                smtpClient.Credentials = new System.Net.NetworkCredential("rasmushermansen490@gmail.com", "");
                 smtpClient.EnableSsl = true;
 
                 await Task.Run(() => smtpClient.Send(mail));
