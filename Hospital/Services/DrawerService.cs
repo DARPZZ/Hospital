@@ -62,6 +62,28 @@ namespace Hospital.Services
             
 
         }
+        public async Task<Drawer> GetStatus(string id)
+        {
+            var endpoint = baseString + "locks/status/" + id;
+            var result = HttpClientSingleton.Client.GetAsync(endpoint).Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var cookies = HttpClientSingleton.Handler.CookieContainer.GetCookies(new Uri(baseString));
+                var json = await result.Content.ReadAsStringAsync();
+                Debug.WriteLine(json.ToString() + "hest");
+                var drawer = JsonConvert.DeserializeObject<Drawer>(json);
+
+                return drawer;
+            }
+            else
+            {
+                Debug.WriteLine("Mistake");
+                return null;
+            }
+
+
+
+        }
         public async Task<bool> OpenLockDrawer(Drawer drawer, string endpoint, string email)
         {
             var url = baseString + "locks/" + endpoint + "/" + email;

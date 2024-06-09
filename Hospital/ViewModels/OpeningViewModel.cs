@@ -36,7 +36,7 @@ namespace Hospital.ViewModels
  
         public OpeningViewModel(UserService userService, DrawerService drawerService)
         {
-            LockUpButtonText = buttonOptions.open_drawer.ToString();
+            
             _userService = userService;
             _drawerService = drawerService;
             string id = Preferences.Default.Get("drawerID", "Youre id");
@@ -46,7 +46,7 @@ namespace Hospital.ViewModels
         }
         public OpeningViewModel(IUserService userService, IDrawerService drawerService, IPreferencesService preferencesService)
         {
-            LockUpButtonText = buttonOptions.open_drawer.ToString();
+            
             us = userService;
             ds = drawerService;
             _preferencesService = preferencesService;
@@ -60,14 +60,15 @@ namespace Hospital.ViewModels
             if(query.ContainsKey("scanText"))
             {
                 ScanText =  query["scanText"] as string;
-                var hest = int.Parse(ScanText);
-                await AssignDrawerIdToUser(hest, email);
+                var parsedText = int.Parse(ScanText);
+                await AssignDrawerIdToUser(parsedText, email);
 
             }
             if(query.ContainsKey("email"))
             {
                 email = query["email"] as string;
-                var toScanText = await GetTheDrawerId(email);
+                var toScanText = await GetTheDrawerId(email);           
+                 GetStatusOfDrawer(toScanText.ToString());
                 if (toScanText.ToString().Equals("0"))
                 {
                     ScanText = "Go to QR to assing a drawer to you";
@@ -120,9 +121,6 @@ namespace Hospital.ViewModels
                 StateOfDrawer = "redball.png";
                 await _drawerService.OpenLockDrawer(drawer, "lock", email);
             }
-
-
-
         }
         private async Task getNameOfUser()
         {
@@ -144,6 +142,20 @@ namespace Hospital.ViewModels
             if (isCreated)
             {Debug.WriteLine("Drawer was placed sucessfully ");}
             else { ScanText = "A user is allready assigned to that drawer";}
+        }
+        private async Task GetStatusOfDrawer(string id)
+        {
+            
+            var drawer = await _drawerService.GetStatus(id);
+            
+            if(drawer.status == "true")
+            {
+                LockUpButtonText = buttonOptions.open_drawer.ToString();
+            }
+            else if (drawer.status == "false")
+            {
+                LockUpButtonText = buttonOptions.close_drawer.ToString();
+            }
         }
         private async Task<int> GetTheDrawerId(string email)
         {
