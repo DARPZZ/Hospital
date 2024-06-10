@@ -48,7 +48,7 @@ namespace Hospital.Services
                 {
                     var cookies = HttpClientSingleton.Handler.CookieContainer.GetCookies(new Uri(baseString));
                     var json = await result.Content.ReadAsStringAsync();
-                    Debug.WriteLine(json.ToString()+ "hest");
+                    
                     var drawer = JsonConvert.DeserializeObject<Drawer>(json);
                     
                     return drawer;
@@ -77,7 +77,7 @@ namespace Hospital.Services
             }
             else
             {
-                Debug.WriteLine("Mistake");
+                Debug.WriteLine("Status fail");
                 return null;
             }
 

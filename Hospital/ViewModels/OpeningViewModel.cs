@@ -36,7 +36,7 @@ namespace Hospital.ViewModels
  
         public OpeningViewModel(UserService userService, DrawerService drawerService)
         {
-            
+            LockUpButtonText = buttonOptions.open_drawer.ToString();
             _userService = userService;
             _drawerService = drawerService;
             string id = Preferences.Default.Get("drawerID", "Youre id");
@@ -68,7 +68,7 @@ namespace Hospital.ViewModels
             {
                 email = query["email"] as string;
                 var toScanText = await GetTheDrawerId(email);           
-                 GetStatusOfDrawer(toScanText.ToString());
+                GetStatusOfDrawer(toScanText.ToString());
                 if (toScanText.ToString().Equals("0"))
                 {
                     ScanText = "Go to QR to assing a drawer to you";
