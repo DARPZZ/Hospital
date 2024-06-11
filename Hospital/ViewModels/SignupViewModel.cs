@@ -46,6 +46,10 @@ public partial class SignupViewModel : BaseViewModel
     {
         await Shell.Current.GoToAsync("///" + nameof(LoginnPage));
     }
+    /// <summary>
+    /// Opretter en ny bruger i systemet 
+    /// </summary>
+    /// <returns></returns>
     [RelayCommand]
     private async Task OnSignupClicked()
     {

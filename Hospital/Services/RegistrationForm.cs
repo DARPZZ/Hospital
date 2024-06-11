@@ -33,7 +33,12 @@ namespace Hospital.Services
                 return false;
             return true;
         }
-
+        /// <summary>
+        /// Tjekke om email er en valid email
+        /// ved hjælp af regex
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         private bool IsValidEmail(string email)
         {
             if (string.IsNullOrWhiteSpace(email))

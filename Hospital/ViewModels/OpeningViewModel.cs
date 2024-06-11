@@ -54,7 +54,11 @@ namespace Hospital.ViewModels
             ScanText = id;
             StateOfDrawer = "redball.png";
         }
-
+        /// <summary>
+        /// Henter de forskellige navigations parameter
+        /// Om du kommer fra LoginPage eller QRPage
+        /// </summary>
+        /// <param name="query"></param>
         public  async void ApplyQueryAttributes(IDictionary<string, object> query)
         { 
             if(query.ContainsKey("scanText"))
@@ -190,6 +194,11 @@ namespace Hospital.ViewModels
             }
             
         }
+        /// <summary>
+        /// Sender en local notifikation ud til brugeren
+        /// baseret på om skuffen er åben eller lukket 
+        /// </summary>
+        /// <param name="mode"></param>
         public void PushNotification(string mode)
         {
             if (mode == "start")

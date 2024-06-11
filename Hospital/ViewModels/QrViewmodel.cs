@@ -31,7 +31,9 @@ namespace Hospital.ViewModels
                 OnScannedTextChanged();
             }
         }
-        // Turning on and off flashlight
+        /// <summary>
+        /// Skifter lommelygte, mellem tændt og slukket
+        /// </summary>
         [RelayCommand]
         public void OnPrintTextClicked()
         {
@@ -56,6 +58,9 @@ namespace Hospital.ViewModels
                 GoToOpening();
             }
         }
+        /// <summary>
+        /// Skifter scene til OpeningPage
+        /// </summary>
 
         public void GoToOpening()
         {

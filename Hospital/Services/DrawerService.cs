@@ -11,9 +11,11 @@ namespace Hospital.Services
 {
     public class DrawerService : IDrawerService
     {
-        //private readonly string baseString = "http://srv534529.hstgr.cloud:4000/";
-       
-        private readonly string baseString = "http://10.176.69.180:4000/";
+        private readonly string baseString = "http://srv534529.hstgr.cloud:4000/";
+
+        //private readonly string baseString = "http://10.176.69.180:4000/";
+        
+        //Giver brugeren en skuffe
         public async Task<bool> SetDrawerToUser(Drawer drawer)
         {
             var url = baseString + "locks/user";
@@ -40,6 +42,7 @@ namespace Hospital.Services
                 return false;
             }
         }
+        //Retunere en drawer, hvor man kan udlede id 
         public async Task<Drawer> GetIdOfUsersDrawer(string email)
         {
                 var endpoint = baseString + "locks/email/" + email;
@@ -62,6 +65,11 @@ namespace Hospital.Services
             
 
         }
+        /// <summary>
+        /// Henter status på den specifikke skuffe 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<Drawer> GetStatus(string id)
         {
             var endpoint = baseString + "locks/status/" + id;
@@ -84,6 +92,13 @@ namespace Hospital.Services
 
 
         }
+        /// <summary>
+        /// Skifter mellem åben og lukning af skuffen baseret på endpoint
+        /// </summary>
+        /// <param name="drawer"></param>
+        /// <param name="endpoint"></param>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public async Task<bool> OpenLockDrawer(Drawer drawer, string endpoint, string email)
         {
             var url = baseString + "locks/" + endpoint + "/" + email;

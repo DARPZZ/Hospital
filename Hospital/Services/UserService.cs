@@ -10,9 +10,14 @@ namespace Hospital.Services
 {
     public class UserService : IUserService
     {
-        //private readonly string baseString = "http://srv534529.hstgr.cloud:4000/";
-        private readonly string baseString = "http://10.176.69.180:4000/";
+        private readonly string baseString = "http://srv534529.hstgr.cloud:4000/";
+        //private readonly string baseString = "http://10.176.69.180:4000/";
 
+        /// <summary>
+        /// Opretter en ny bruger i systemet
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public async Task<bool> CreateUserAsync(User user)
         {
             var url = baseString + "users";
@@ -42,7 +47,12 @@ namespace Hospital.Services
                 return false;
             }
         }
-
+        /// <summary>
+        /// Bruges til at logge en bruger ind normalt
+        /// Bruges også til Auto login
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public async Task<bool> LogUserInAsync(User user)
         {
            
@@ -72,6 +82,11 @@ namespace Hospital.Services
                 }
             
         }
+        /// <summary>
+        /// Henter en bruger baseret på email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
 
         public async Task<User> GetUserByEmail(string email)
         {
@@ -98,6 +113,13 @@ namespace Hospital.Services
             return null;
         }
 
+        /// <summary>
+        /// Giver brugeren mulighed for a ændre adgangskode ord via email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public async Task<User> SetNewPassword(string email, string password)
         {
             var endpoint = baseString + "users/" + email + "/" + "password";
